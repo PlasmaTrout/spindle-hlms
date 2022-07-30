@@ -15,8 +15,9 @@ export default function Home() {
 
     socket.on('connect', () => {
       console.log("Socket connected!");
+     
     });
-    
+
     return null;
   }
 

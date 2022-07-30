@@ -15,5 +15,10 @@ npm run build
 npm start
 ```
 
+API To Turn Alarms On And Off:
+```
+http://localhost:3000/api/alarm?id=1&mode=active
+```
+
 
 
