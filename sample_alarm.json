@@ -1,0 +1,12 @@
+{
+  "id": 1,
+  "date": "2022-07-27T12:26:03",
+  "tid": "CRSCTYFLLOC1",
+  "aid": "NMS",
+  "severity": "critical",
+  "message": "Spindle Critical Test Alarm",
+  "state": "inactive",
+  "description": "This is just a test alarm point so you can see how they are created in the db.",
+  "group": "default",
+  "link": "http://www.google.com"
+}

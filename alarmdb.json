@@ -1,0 +1,52 @@
+{
+  "alarms": [
+    {
+      "id": 1,
+      "date": "2022-07-27T12:26:03",
+      "tid": "CRSCTYFLLOC1",
+      "aid": "NMS",
+      "severity": "critical",
+      "message": "Spindle Critical Test Alarm",
+      "state": "active",
+      "description": "This is just a test alarm point so you can see how they are created in the db.",
+      "group": "default",
+      "link": "http://www.google.com"
+    },
+    {
+      "date": "2022-07-27T15:19:47",
+      "tid": "CRSCTYFLLOC1",
+      "aid": "2",
+      "severity": "major",
+      "message": "Spindle Major Test Alarm",
+      "state": "active",
+      "description": "Test",
+      "group": "default",
+      "link": "",
+      "id": 2
+    },
+    {
+      "date": "2022-07-27T15:19:48",
+      "tid": "CRSCTYFLLOC1",
+      "aid": "3",
+      "severity": "minor",
+      "message": "Spindle Minor Test Alarm",
+      "state": "active",
+      "description": "Test",
+      "group": "default",
+      "link": "",
+      "id": 3
+    },
+    {
+      "date": "2022-07-27T15:19:48",
+      "tid": "CRSCTYFLLOC1",
+      "aid": "3",
+      "severity": "info",
+      "message": "Spindle Informational Test Alarm",
+      "state": "active",
+      "description": "Test",
+      "group": "default",
+      "link": "",
+      "id": 4
+    }
+  ]
+}
