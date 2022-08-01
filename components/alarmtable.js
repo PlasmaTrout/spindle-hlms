@@ -1,33 +1,8 @@
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
 
-export default function AlarmTable() {
-  const [data, setData] = useState(null);
-  const [isLoading, setLoading] = useState(false);
-
-  const fetchData = () => {
-    fetch("/api/alarms")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("REFETCH!");
-        setData(data);
-      });
-  };
-
-  useEffect(() => {
-    setLoading(true);
-    fetch("/api/alarms")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-        const socket = io();
-        console.log("listening for sockets");
-        socket.on("alarm", () => {
-          fetchData();
-        });
-      });
-  }, []);
+export default function AlarmTable(props) {
+  const { data } = props;
 
   return (
     <table className="table">

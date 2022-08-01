@@ -1,12 +1,39 @@
 import Head from "next/head";
 import NavBar from "../components/navbar";
 import AlarmTable from "../components/alarmtable";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import io from "socket.io-client";
+import { SocketAddress } from "net";
 let socket;
 
 export default function Home() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(null);
+
   useEffect(() => socketInitializer(), []);
+
+  const fetchData = () => {
+    fetch("/api/alarms")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("REFETCH!");
+        setData(data);
+      });
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    fetch("/api/alarms")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+        const socket = io();
+        socket.on("alarm", () => {
+          fetchData();
+        });
+      });
+  }, []);
 
   const socketInitializer = async () => {
     await fetch("/api/socket");
@@ -17,6 +44,11 @@ export default function Home() {
     });
 
     return null;
+  };
+
+  const refreshPressed = (e) => {
+    e.preventDefault();
+    fetchData();
   };
 
   return (
@@ -37,26 +69,27 @@ export default function Home() {
           <header className="toolbar toolbar-header">
             <h1 className="title">Spindle NMS</h1>
             <div className="toolbar-actions">
-              <div className="btn-group">
-                
-              </div>
-              <button className="btn btn-default pull-right">
-                  <span className="icon icon-retweet"></span>
-                </button>
+              <div className="btn-group"></div>
+              <button
+                className="btn btn-default pull-right"
+                onClick={refreshPressed}
+              >
+                <span className="icon icon-retweet"></span>
+              </button>
             </div>
           </header>
           <div className="window-content">
             <div className="pane-group">
-              <div class="pane-sm sidebar">
+              <div className="pane-sm sidebar">
                 <NavBar></NavBar>
               </div>
-              <div class="pane">
-                <AlarmTable></AlarmTable>
+              <div className="pane">
+                <AlarmTable data={data}></AlarmTable>
               </div>
             </div>
           </div>
-          <footer class="toolbar toolbar-footer">
-            <h1 class="title">Footer</h1>
+          <footer className="toolbar toolbar-footer">
+            <h1 className="title">Footer</h1>
           </footer>
         </div>
       </main>

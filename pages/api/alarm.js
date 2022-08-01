@@ -9,7 +9,7 @@ export default function handler(req, res) {
     const alarmPoint = db.data.alarms.find((a) => a.id == id);
     alarmPoint.state = mode || "active";
     db.write();
-    res.socket.server.io.emit("alarm", {});
+    res.socket.server.io.emit("alarm", alarmPoint);
   }
   
   res.status(200).json({ id: id, state: mode });
