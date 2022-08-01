@@ -20,5 +20,9 @@
     "socket.io": "*",
     "socket.io-client": "^4.5.1",
     "tls": "^0.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.21.0",
+    "eslint-config-next": "12.2.3"
   }
 }

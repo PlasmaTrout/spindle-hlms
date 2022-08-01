@@ -1,6 +1,6 @@
 import { LowSync, JSONFileSync } from "lowdb";
 
-export default function handler(req, res) {
+const handler = (req, res) => {
   const { id, mode } = req.query;
   if (id) {
     console.log(req.query);
@@ -13,4 +13,6 @@ export default function handler(req, res) {
   }
   
   res.status(200).json({ id: id, state: mode });
-}
+};
+
+export default handler;

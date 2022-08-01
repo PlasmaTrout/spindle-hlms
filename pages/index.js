@@ -1,12 +1,13 @@
 import Head from "next/head";
 import NavBar from "../components/navbar";
+import TopBar from "../components/topbar";
 import AlarmTable from "../components/alarmtable";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
-import { SocketAddress } from "net";
+
 let socket;
 
-export default function Home() {
+const Home = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(null);
 
@@ -59,25 +60,12 @@ export default function Home() {
           content="width=device-width, initial-scale=1"
         ></meta>
         <title>Spindle NMS</title>
-        <link rel="stylesheet" href="../photon/css/photon.min.css" />
-        <link rel="stylesheet" href="/alarmtable.css"></link>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
         <div className="window">
-          <header className="toolbar toolbar-header">
-            <h1 className="title">Spindle NMS</h1>
-            <div className="toolbar-actions">
-              <div className="btn-group"></div>
-              <button
-                className="btn btn-default pull-right"
-                onClick={refreshPressed}
-              >
-                <span className="icon icon-retweet"></span>
-              </button>
-            </div>
-          </header>
+          <TopBar refreshEvent={refreshPressed}></TopBar>
           <div className="window-content">
             <div className="pane-group">
               <div className="pane-sm sidebar">
@@ -97,4 +85,6 @@ export default function Home() {
       <footer></footer>
     </div>
   );
-}
+};
+
+export default Home;

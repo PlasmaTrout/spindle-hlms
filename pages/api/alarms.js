@@ -1,6 +1,6 @@
 import { LowSync, JSONFileSync } from "lowdb";
 
-export default function handler(req, res) {
+const handler = (req, res) => {
   const db = new LowSync(new JSONFileSync("alarmdb.json"));
   
   if(req.method === 'GET'){
@@ -18,4 +18,6 @@ export default function handler(req, res) {
   }
 
   return res.status(404);
-}
+};
+
+export default handler;

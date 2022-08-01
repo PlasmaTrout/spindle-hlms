@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
-import io from "socket.io-client";
+import styles from './alarmtable.module.css';
 
-export default function AlarmTable(props) {
+const AlarmTable = (props) => {
   const { data } = props;
 
   return (
@@ -42,7 +41,7 @@ export default function AlarmTable(props) {
           ?.filter((alarm) => alarm.state === "active")
           .map((alarm) => (
             <tr
-              className={alarm.severity}
+              className={styles[alarm.severity]}
               title={alarm.description}
               key={alarm.id}
             >
@@ -62,4 +61,6 @@ export default function AlarmTable(props) {
       </tbody>
     </table>
   );
-}
+};
+
+export default AlarmTable;

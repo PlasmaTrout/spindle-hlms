@@ -1,0 +1,25 @@
+.critical {
+  background-color: red; 
+   color: white;
+}
+
+.major {
+ background-color: #FF4719;
+   color: white;
+}
+
+.minor {
+ background-color: yellow;
+   color: black;
+}
+
+.info {
+ background-color: blue;
+   color: white;
+}
+
+.clear {
+ background-color: green;
+   color: black;
+   opacity: .8;
+}

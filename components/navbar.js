@@ -1,5 +1,4 @@
-export default function NavBar() {
-
+const NavBar = () => {
   return(
     <nav className="nav-group">
       <h5 className="nav-group-title">Navigation</h5>
@@ -9,4 +8,6 @@ export default function NavBar() {
       </a>
     </nav>
   );
-}
+};
+
+export default NavBar;
