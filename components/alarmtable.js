@@ -54,7 +54,7 @@ const AlarmTable = (props) => {
               <td>{alarm.state}</td>
               <td>{alarm.group}</td>
               <td>
-                <a href={alarm.link}>Link</a>
+                <a href={alarm.link} target='blank'>Link</a>
               </td>
             </tr>
           ))}
