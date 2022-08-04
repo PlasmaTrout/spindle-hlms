@@ -5,7 +5,13 @@ const handler = (req, res) => {
   
   if(req.method === 'GET'){
     db.read();
-    return res.status(200).json(db.data.alarms);
+    const { alarms } = db.data;
+    alarms.sort((a,b) => {
+
+      return new Date(b.date) - new Date(a.date);
+    });
+
+    return res.status(200).json(alarms);
   }
 
   if(req.method === 'POST'){

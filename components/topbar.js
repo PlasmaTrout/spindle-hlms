@@ -8,6 +8,9 @@ const TopBar = (props) => {
         <button className="btn btn-default pull-right" onClick={refreshEvent}>
           <span className="icon icon-retweet"></span>
         </button>
+        <button className="btn btn-default pull-right">
+          <span className="icon icon-plus"></span>
+        </button>
       </div>
     </header>
   );

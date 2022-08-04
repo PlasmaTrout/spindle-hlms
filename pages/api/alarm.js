@@ -8,6 +8,7 @@ const handler = (req, res) => {
     db.read();
     const alarmPoint = db.data.alarms.find((a) => a.id == id);
     alarmPoint.state = mode || "active";
+    alarmPoint.date = new Date();
     db.write();
     res.socket.server.io.emit("alarm", alarmPoint);
   }

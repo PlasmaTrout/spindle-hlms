@@ -47,6 +47,18 @@
       "group": "default",
       "link": "",
       "id": 4
+    },
+    {
+      "date": "2022-08-04T19:02:00.067Z",
+      "tid": "CRSCTYFLLOC1",
+      "aid": "jeffs-uMac",
+      "severity": "build",
+      "message": "Jenkins Build In Progress",
+      "state": "active",
+      "description": "Test",
+      "group": "default",
+      "link": "http://jeffs-uMAC:8080",
+      "id": 100
     }
   ]
 }
