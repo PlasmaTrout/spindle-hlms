@@ -9,7 +9,9 @@ let socket;
 
 const Home = () => {
   const [data, setData] = useState(null);
+  const [clearVis, setClearVis] = useState(null);
   const [loading, setLoading] = useState(null);
+  const [selectedAlarm, setSelectedAlarm] = useState(null);
 
   useEffect(() => socketInitializer(), []);
 
@@ -52,6 +54,23 @@ const Home = () => {
     fetchData();
   };
 
+  const rowSelected = (e, alarm) => {
+    setSelectedAlarm(alarm.id);
+    const mode = alarm.state === "inactive" ? "active" : "inactive";
+    fetch(`/api/alarm?id=${alarm.id}&&mode=${mode}`).then((res) =>
+      console.log(res)
+    );
+  };
+
+  const toggleClearVisible = (e) => {
+    if (clearVis) {
+      setClearVis(false);
+    } else {
+      console.log("its false");
+      setClearVis(true);
+    }
+  };
+
   return (
     <div>
       <Head>
@@ -65,14 +84,22 @@ const Home = () => {
 
       <main>
         <div className="window">
-          <TopBar refreshEvent={refreshPressed}></TopBar>
+          <TopBar
+            refreshEvent={refreshPressed}
+            toggleClearVisible={toggleClearVisible}
+            selectedAlarm={selectedAlarm}
+          ></TopBar>
           <div className="window-content">
             <div className="pane-group">
               <div className="pane-sm sidebar">
                 <NavBar></NavBar>
               </div>
               <div className="pane">
-                <AlarmTable data={data}></AlarmTable>
+                <AlarmTable
+                  data={data}
+                  hideClear={clearVis}
+                  rowSelect={rowSelected}
+                ></AlarmTable>
               </div>
             </div>
           </div>

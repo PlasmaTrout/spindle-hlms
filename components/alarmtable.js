@@ -1,7 +1,7 @@
-import styles from './alarmtable.module.css';
+import styles from "./alarmtable.module.css";
 
 const AlarmTable = (props) => {
-  const { data } = props;
+  const { data, hideClear, rowSelect } = props;
 
   return (
     <table className="table">
@@ -38,12 +38,23 @@ const AlarmTable = (props) => {
       </thead>
       <tbody>
         {data
-          ?.filter((alarm) => alarm.state === "active")
+          ?.filter((alarm) => {
+            console.log(hideClear);
+            if (hideClear) {
+              if (alarm.state === "active") {
+                return true;
+              } else {
+                return false;
+              }
+            }
+            return true;
+          })
           .map((alarm) => (
             <tr
-              className={styles[alarm.severity]}
+              className={styles[alarm.state === "inactive" ? "clear" : alarm.severity]}
               title={alarm.description}
               key={alarm.id}
+              onDoubleClick={(e) => rowSelect(e, alarm)}
             >
               <td>{alarm.id}</td>
               <td>{alarm.date}</td>
@@ -54,7 +65,9 @@ const AlarmTable = (props) => {
               <td>{alarm.state}</td>
               <td>{alarm.group}</td>
               <td>
-                <a href={alarm.link} target='blank'>Link</a>
+                <a href={alarm.link} target="blank">
+                  Link
+                </a>
               </td>
             </tr>
           ))}
