@@ -14,6 +14,21 @@ const handler = (req, res) => {
     return res.status(200).json(alarms);
   }
 
+  if(req.method === 'PUT'){
+    db.read();
+    const incomingUpdate = JSON.parse(req.body);
+    const { alarms } = db.data;
+
+    const alarmToUpdate = alarms.find((a) => a.id === incomingUpdate.id);
+    alarmToUpdate.message = incomingUpdate.message;
+    alarmToUpdate.description = incomingUpdate.description;
+    alarmToUpdate.tid = incomingUpdate.tid;
+    alarmToUpdate.aid = incomingUpdate.aid;
+    
+    db.write();
+    return res.status(200).json(alarmToUpdate);
+  }
+
   if(req.method === 'POST'){
     db.read();
     db.data ||= { alarms: [] }
