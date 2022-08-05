@@ -1,5 +1,8 @@
 import Head from "next/head";
+import TopBar from "../components/topbar";
+import NavBar from "../components/navbar";
 import { useState, useEffect } from "react";
+import styles from "./editor.module.css";
 
 const Editor = (props) => {
   const [data, setData] = useState(null);
@@ -9,7 +12,7 @@ const Editor = (props) => {
     aid: "",
     tid: "",
     message: "",
-    severity: ""
+    severity: "",
   });
 
   const fetchAlarms = () => {
@@ -31,12 +34,13 @@ const Editor = (props) => {
 
   const saveCurrentAlarm = (alarm) => {
     fetch("/api/alarms", {
-      method: 'PUT',
+      method: "PUT",
       body: JSON.stringify(alarm),
-    }).then((res) => res.json)
-    .then((data) => {
-      console.log(data);
-    });
+    })
+      .then((res) => res.json)
+      .then((data) => {
+        console.log(data);
+      });
   };
 
   const alarmPointClicked = (e, alarm) => {
@@ -49,7 +53,7 @@ const Editor = (props) => {
     const value = e.target.value;
     setSelectedAlarm({
       ...selectedAlarm,
-      [e.target.name]: value
+      [e.target.name]: value,
     });
   };
 
@@ -57,6 +61,32 @@ const Editor = (props) => {
     e.preventDefault();
     saveCurrentAlarm(selectedAlarm);
     fetchAlarms();
+  };
+
+  const createStubAlarm = () => {
+
+    const alarm = {
+      date: new Date().toJSON,
+      tid: "TID",
+      aid: "AID",
+      severity: "info",
+      message: "message",
+      state: "inactive",
+      description: "description",
+      group: "default",
+      link: "",
+      id: 0
+    };
+  
+    fetch("/api/alarms", {
+      method: "POST",
+      body: JSON.stringify(alarm),
+    })
+      .then((res) => res.json())
+      .then((jsonData) => {
+        fetchAlarms();
+        setSelectedAlarm(jsonData);
+      });
   };
 
   return (
@@ -72,13 +102,19 @@ const Editor = (props) => {
 
       <main>
         <div className="window">
-          <header className="toolbar toolbar-header">
-            <h1 className="title">Alarm Point Editor</h1>
-          </header>
+        <TopBar
+            refreshEvent={fetchAlarms}
+            createStubAlarm={createStubAlarm}
+            uiMode="editor"
+          ></TopBar>
+          
           <div className="window-content">
             <div className="pane-group">
+              <div className="pane-sm sidebar">
+                <NavBar></NavBar>
+              </div>
               <div className="pane">
-                <table className="table-striped">
+                <table>
                   <thead>
                     <tr>
                       <th>Edit</th>
@@ -91,9 +127,12 @@ const Editor = (props) => {
                   </thead>
                   <tbody>
                     {data?.map((alarm) => (
-                      <tr key={alarm.id}>
+                      <tr key={alarm.id} className={styles[alarm.severity]}>
                         <td>
-                          <button className="btn btn-default" onClick={(e) => alarmPointClicked(e, alarm)}>
+                          <button
+                            className="btn btn-default"
+                            onClick={(e) => alarmPointClicked(e, alarm)}
+                          >
                             <span className="icon icon-pencil"></span>
                           </button>
                         </td>
@@ -108,26 +147,79 @@ const Editor = (props) => {
                 </table>
               </div>
               <div className="pane sidebar">
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className={styles.editor_pane}>
                   <div className="form-group">
                     <label>Target ID (Location)</label>
-                      <input name="tid" type="text" className="form-control" value={selectedAlarm?.tid} onChange={inputChanged}/>
+                    <input
+                      name="tid"
+                      type="text"
+                      className="form-control"
+                      value={selectedAlarm?.tid}
+                      onChange={inputChanged}
+                    />
                   </div>
                   <div className="form-group">
                     <label>Alarm ID (Specific Device)</label>
-                      <input name="aid" type="text" className="form-control"value={selectedAlarm?.aid} onChange={inputChanged}/>
+                    <input
+                      name="aid"
+                      type="text"
+                      className="form-control"
+                      value={selectedAlarm?.aid}
+                      onChange={inputChanged}
+                    />
                   </div>
                   <div className="form-group">
                     <label>Alarm Message</label>
-                      <input name="message" type="text" className="form-control" value={selectedAlarm?.message} onChange={inputChanged}/>
+                    <input
+                      name="message"
+                      type="text"
+                      className="form-control"
+                      value={selectedAlarm?.message}
+                      onChange={inputChanged}
+                    />
                   </div>
                   <div className="form-group">
                     <label>Alarm Description</label>
-                      <textarea name="description" className="form-control" rows="3" onChange={inputChanged} value={selectedAlarm?.description}></textarea>
+                    <textarea
+                      name="description"
+                      className="form-control"
+                      rows="3"
+                      onChange={inputChanged}
+                      value={selectedAlarm?.description}
+                    ></textarea>
+                  </div>
+                  <div className="form-group">
+                    <label>Severity</label>
+                    <select
+                      name="severity"
+                      className="form-control"
+                      value={selectedAlarm?.severity}
+                      onChange={inputChanged}
+                    >
+                      <option value="info">Informational</option>
+                      <option value="critical">Critical</option>
+                      <option value="major">Major</option>
+                      <option value="minor">Minor</option>
+                      <option value="build">Build</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label>Default Link</label>
+                    <input
+                      name="link"
+                      type="text"
+                      className="form-control"
+                      value={selectedAlarm?.link}
+                      onChange={inputChanged}
+                    />
                   </div>
                   <div className="form-actions">
-                    <button type="submit" className="btn btn-form btn-default">Cancel</button>
-                    <button type="submit" className="btn btn-form btn-primary">OK</button>
+                    <button type="submit" className="btn btn-form btn-default">
+                      Cancel
+                    </button>
+                    <button type="submit" className="btn btn-form btn-primary">
+                      OK
+                    </button>
                   </div>
                 </form>
               </div>

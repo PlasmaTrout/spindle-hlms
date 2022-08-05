@@ -71,6 +71,31 @@ const Home = () => {
     }
   };
 
+  const createStubAlarm = () => {
+
+    const alarm = {
+      date: new Date().toJSON,
+      tid: "TID",
+      aid: "AID",
+      severity: "info",
+      message: "message",
+      state: "inactive",
+      description: "description",
+      group: "default",
+      link: "",
+      id: 0
+    };
+  
+    fetch("/api/alarms", {
+      method: "POST",
+      body: JSON.stringify(alarm),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };
+
   return (
     <div>
       <Head>
@@ -88,6 +113,7 @@ const Home = () => {
             refreshEvent={refreshPressed}
             toggleClearVisible={toggleClearVisible}
             selectedAlarm={selectedAlarm}
+            uiMode="alarms"
           ></TopBar>
           <div className="window-content">
             <div className="pane-group">

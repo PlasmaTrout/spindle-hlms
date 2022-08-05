@@ -65,9 +65,11 @@ const AlarmTable = (props) => {
               <td>{alarm.state}</td>
               <td>{alarm.group}</td>
               <td>
-                <a href={alarm.link} target="blank">
-                  Link
+                {alarm.link &&
+                <a className="btn btn-default" href={alarm?.link} target="blank">
+                  <span className="icon icon-link"></span>
                 </a>
+                }
               </td>
             </tr>
           ))}

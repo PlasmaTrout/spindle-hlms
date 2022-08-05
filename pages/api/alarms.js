@@ -24,6 +24,7 @@ const handler = (req, res) => {
     alarmToUpdate.description = incomingUpdate.description;
     alarmToUpdate.tid = incomingUpdate.tid;
     alarmToUpdate.aid = incomingUpdate.aid;
+    alarmToUpdate.severity = incomingUpdate.severity;
     
     db.write();
     return res.status(200).json(alarmToUpdate);
@@ -32,10 +33,11 @@ const handler = (req, res) => {
   if(req.method === 'POST'){
     db.read();
     db.data ||= { alarms: [] }
-    req.body.id = db.data.alarms.length + 1;
-    db.data.alarms.push(req.body);
+    const incomingUpdate = JSON.parse(req.body);
+    incomingUpdate.id = db.data.alarms.length + 1;
+    db.data.alarms.push(incomingUpdate);
     db.write();
-    return res.status(200).json(req.body);
+    return res.status(200).json(incomingUpdate);
   }
 
   return res.status(404);

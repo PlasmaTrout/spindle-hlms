@@ -1,0 +1,39 @@
+.editor_pane {
+  padding: 10px;
+}
+
+.critical {
+  background-color: red; 
+   color: white;
+   font-weight: bold;
+}
+
+.major {
+ background-color: #FF4719;
+   color: white;
+   font-weight: bold;
+}
+
+.minor {
+ background-color: yellow;
+   color: black;
+   font-weight: bold;
+}
+
+.info {
+ background-color: blue;
+   color: white;
+   font-weight: bold;
+}
+
+.build {
+  background-color: cadetblue;
+  color: white;
+  font-weight: bold;
+}
+
+.clear {
+ background-color: green;
+   color: white;
+   font-weight: bold;
+}
