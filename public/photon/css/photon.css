@@ -522,6 +522,7 @@ h6 {
 }
 .toolbar-header .title {
   margin-top: 1px;
+  font-size: 1.5em;
 }
 
 .toolbar-footer {
@@ -652,6 +653,7 @@ textarea {
   overflow-y: auto;
   flex: 1;
   border-left: 1px solid #ddd;
+  background-color: #f5f5f4;
 }
 .pane:first-child {
   border-left: 0;

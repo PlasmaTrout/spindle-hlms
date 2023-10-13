@@ -19,7 +19,7 @@ const Home = () => {
     fetch("/api/alarms")
       .then((res) => res.json())
       .then((data) => {
-        console.log("REFETCH!");
+        //console.log("REFETCH!");
         setData(data);
       });
   };

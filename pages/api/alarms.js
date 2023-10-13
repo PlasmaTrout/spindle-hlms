@@ -25,6 +25,7 @@ const handler = (req, res) => {
     alarmToUpdate.tid = incomingUpdate.tid;
     alarmToUpdate.aid = incomingUpdate.aid;
     alarmToUpdate.severity = incomingUpdate.severity;
+    alarmToUpdate.link = incomingUpdate.link;
     
     db.write();
     return res.status(200).json(alarmToUpdate);

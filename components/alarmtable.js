@@ -39,7 +39,7 @@ const AlarmTable = (props) => {
       <tbody>
         {data
           ?.filter((alarm) => {
-            console.log(hideClear);
+            //console.log(hideClear);
             if (hideClear) {
               if (alarm.state === "active") {
                 return true;

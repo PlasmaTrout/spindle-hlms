@@ -1,4 +1,4 @@
-import '../public/photon/css/photon.min.css'
+import '../public/photon/css/photon.css'
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
