@@ -1,7 +1,7 @@
 import { LowSync, JSONFileSync } from "lowdb";
 
 const handler = (req, res) => {
-  const { id, mode, link } = req.query;
+  const { id, mode, link, tid, aid } = req.query;
   if (id) {
     console.log(req.query);
     const db = new LowSync(new JSONFileSync("alarmdb.json"));
@@ -19,7 +19,29 @@ const handler = (req, res) => {
     res.socket.server.io.emit("alarm", alarmPoint);
   }
 
-  res.status(200).json({ id: id, state: mode });
+  if (tid) {
+    const db = new LowSync(new JSONFileSync("alarmdb.json"));
+    db.read();
+    var points = db.data.alarms.filter((a) => a.tid == tid);
+
+    if (aid) {
+      points = points.filter((a) => a.aid == aid);
+    }
+
+    if (points) {
+      points.forEach((element) => {
+        element.state = mode || "active";
+        element.date = new Date();
+        if (link) {
+          element.link = link;
+        }
+      });
+    }
+    db.write();
+    res.socket.server.io.emit("alarm", null);
+  }
+
+  res.status(200).json({ id: id, state: mode, tid: tid, aid: aid });
 };
 
 export default handler;

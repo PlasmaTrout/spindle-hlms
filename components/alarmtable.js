@@ -8,9 +8,6 @@ const AlarmTable = (props) => {
       <thead>
         <tr>
           <td>
-            <abbr title="Id">Id</abbr>
-          </td>
-          <td>
             <abbr title="Date">Date</abbr>
           </td>
           <td>
@@ -53,10 +50,10 @@ const AlarmTable = (props) => {
             <tr
               className={styles[alarm.state === "inactive" ? "clear" : alarm.severity]}
               title={alarm.description}
+              id="alarm-{alarm.id}"
               key={alarm.id}
               onDoubleClick={(e) => rowSelect(e, alarm)}
             >
-              <td>{alarm.id}</td>
               <td>{alarm.date}</td>
               <td>{alarm.tid}</td>
               <td>{alarm.aid}</td>
