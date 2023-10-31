@@ -31,7 +31,7 @@
       "severity": "minor",
       "message": "Possible Memory Leak Occuring.",
       "state": "inactive",
-      "description": "The GC counts are exceeding the current configured threshold",
+      "description": "The GC counts are exceeding the current configured threshold.",
       "group": "default",
       "link": "",
       "id": 3

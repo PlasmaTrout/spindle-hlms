@@ -1,0 +1,35 @@
+name: spindle_ams
+services:
+  main_app:
+    cpu_shares: 10
+    command: []
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    image: plasmatrout/spindle-nms:amd64-latest
+    labels:
+      icon: https://icon.casaos.io/main/all/spindle-nms.png
+    ports:
+      - target: 3000
+        published: "3000"
+        protocol: tcp
+    restart: unless-stopped
+    volumes: []
+    devices: []
+    cap_add: []
+    environment: []
+    network_mode: bridge
+    privileged: false
+    container_name: ""
+x-casaos:
+  author: self
+  category: self
+  hostname: localhost
+  icon: https://icon.casaos.io/main/all/spindle-nms.png
+  index: /
+  port_map: "3000"
+  scheme: http
+  store_app_id: spindle_ams
+  title:
+    custom: Spindle AMS
