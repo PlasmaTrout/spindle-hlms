@@ -9,7 +9,7 @@ services:
           memory: 256M
     image: plasmatrout/spindle-nms:amd64-latest
     labels:
-      icon: https://icon.casaos.io/main/all/spindle-nms.png
+      icon: https://raw.githubusercontent.com/PlasmaTrout/spindle-hlms/main/spindle.png
     ports:
       - target: 3000
         published: "3000"
@@ -26,7 +26,7 @@ x-casaos:
   author: self
   category: self
   hostname: localhost
-  icon: https://icon.casaos.io/main/all/spindle-nms.png
+  icon: https://raw.githubusercontent.com/PlasmaTrout/spindle-hlms/main/spindle.png
   index: /
   port_map: "3000"
   scheme: http
