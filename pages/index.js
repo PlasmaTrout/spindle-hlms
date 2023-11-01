@@ -103,7 +103,7 @@ const Home = () => {
           name="viewport"
           content="width=device-width, initial-scale=1"
         ></meta>
-        <title>Spindle NMS</title>
+        <title>Spindle HLMS</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
