@@ -31,7 +31,7 @@ npm run build
 npm start
 ```
 
-To Build Docker for other archictecures: 
+To Build Docker for other architectures: 
 ```
 sudo docker buildx build --platform=linux/arm/v8 -t spindle-nms .
 sudo docker run -p 3000:3000 -d -rm spindle-nms
